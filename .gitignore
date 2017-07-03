@@ -1,0 +1,7 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea
+target
+project/target
+/src/main/scala/com/diy/App.scala
+/src/main/resources/db/migration/V5__alter_user_table_add_salt_column.bkp
+/src/main/resources/db/migration/V2__insert.bkp

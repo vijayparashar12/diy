@@ -1,0 +1,1 @@
+# sample repo for AKKA HTTP + SLICK + FLYWAY + SPRAY JSON
