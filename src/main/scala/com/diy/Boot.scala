@@ -2,10 +2,9 @@ package com.diy
 
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
-import akka.http.scaladsl.server.Directives._
 import akka.stream.ActorMaterializer
 import com.diy.config.{ConfigurationService, ModuleConfiguration}
-import com.diy.rest.{MatrixRoutes, UserRoutes}
+import com.diy.rest.ServiceRoutes
 import com.google.inject.Guice
 
 object Boot extends App {
@@ -16,13 +15,11 @@ object Boot extends App {
 
   val injector = Guice.createInjector(new ModuleConfiguration)
 
-  var userRoutes = injector.getInstance(classOf[UserRoutes])
-
-  val matrixRoutes = injector.getInstance(classOf[MatrixRoutes])
+  var route = injector.getInstance(classOf[ServiceRoutes]).route
 
   val config = injector.getInstance(classOf[ConfigurationService]).config
 
-  val bindingFuture = Http().bindAndHandle(userRoutes.route ~ matrixRoutes.route,
+  val bindingFuture = Http().bindAndHandle(route,
     config.getString("server.interface"),
     config.getInt("server.port"))
 

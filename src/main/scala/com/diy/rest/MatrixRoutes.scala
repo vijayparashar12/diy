@@ -7,12 +7,11 @@ import akka.http.scaladsl.server.Route
 /**
   * Created by vparashar on 02/07/2017.
   */
-class MatrixRoutes {
-  val route: Route =
+trait MatrixRoutes {
+  val matrixRoutes: Route =
     path("health") {
       get {
         complete(StatusCodes.OK)
       }
     }
-
 }

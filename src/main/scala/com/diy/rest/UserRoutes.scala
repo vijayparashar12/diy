@@ -6,13 +6,13 @@ import akka.http.scaladsl.server.Route
 import com.diy.domain.UserJsonProtocol._
 import com.diy.domain.persistence.UserRepository
 import com.diy.domain.{Password, User}
-import com.google.inject.Inject
 
 import scala.util.{Failure, Success}
 
-class UserRoutes @Inject()(userRepository: UserRepository) {
+trait UserRoutes {
+  val userRepository: UserRepository
 
-  val route: Route =
+  val userRoutes: Route =
     path("users") {
       get {
         onComplete(
