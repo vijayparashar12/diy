@@ -3,7 +3,7 @@ package com.diy
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.stream.ActorMaterializer
-import com.diy.config.{ConfigurationService, ModuleConfiguration}
+import com.diy.config.{TypesafeConfiguration, ModuleConfiguration}
 import com.diy.rest.ServiceRoutes
 import com.google.inject.Guice
 
@@ -17,7 +17,7 @@ object Boot extends App {
 
   var route = injector.getInstance(classOf[ServiceRoutes]).route
 
-  val config = injector.getInstance(classOf[ConfigurationService]).config
+  val config = injector.getInstance(classOf[TypesafeConfiguration]).config
 
   val bindingFuture = Http().bindAndHandle(route,
     config.getString("server.interface"),

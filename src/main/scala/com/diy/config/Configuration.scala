@@ -2,11 +2,15 @@ package com.diy.config
 
 import com.typesafe.config.{Config, ConfigFactory}
 
-trait Configuration {
+trait Configuration[T] {
+  def config: T
 }
 
-case class ConfigurationService() extends Configuration {
-  lazy val config: Config = ConfigFactory.load(this.getClass().getClassLoader(), "application.conf")
+case class TypesafeConfiguration() extends Configuration[Config] {
+
+  lazy val configuration: Config = ConfigFactory.load(this.getClass().getClassLoader(), "application.conf")
+
+  override def config: Config = configuration
 }
 
 

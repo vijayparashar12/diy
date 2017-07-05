@@ -11,7 +11,7 @@ import scala.concurrent.Future
 /**
   * Created by vparashar on 02/07/2017.
   */
-class UserRepository @Inject()(dbConfig: DBConfig) {
+class UserRepository @Inject()(dbConfig: DBConfig[Database]) {
 
   val db = dbConfig.profile
 
