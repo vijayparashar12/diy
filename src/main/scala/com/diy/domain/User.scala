@@ -1,16 +1,18 @@
 package com.diy.domain
 
 
-import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
-import spray.json.{DefaultJsonProtocol, DeserializationException, JsNumber, JsObject, JsString, JsValue, RootJsonFormat}
+import java.util.UUID
 
-case class User(id: Option[Long] = None, email: String, password: Password)
+import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
+import spray.json.{DefaultJsonProtocol, DeserializationException, JsObject, JsString, JsValue, RootJsonFormat}
+
+case class User(id: Option[UUID] = None, email: String, password: Password)
 
 object UserJsonProtocol extends SprayJsonSupport with DefaultJsonProtocol {
 
   implicit object UserJsonFormat extends RootJsonFormat[User] {
     def write(u: User) = JsObject(
-      "id" -> JsNumber(u.id.getOrElse(0l)),
+      "id" -> JsString(u.id.getOrElse("UUID").toString),
       "email" -> JsString(u.email) //,
       //"password" -> JsString(u.password.toString)
     )

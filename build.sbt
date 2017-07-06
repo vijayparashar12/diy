@@ -29,6 +29,8 @@ libraryDependencies += "com.google.inject" % "guice" % "4.1.0"
 //Library for password encryption
 libraryDependencies += "com.github.t3hnar" %% "scala-bcrypt" % "3.0"
 
+
+//Library for rest service
 libraryDependencies += "io.spray" %%  "spray-json" % "1.3.3"
 
 libraryDependencies +="com.typesafe.akka" %% "akka-http" % "10.0.9"

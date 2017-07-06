@@ -1,5 +1,7 @@
 package com.diy.domain.persistence
 
+import java.util.UUID
+
 import com.diy.config.DBConfig
 import com.diy.domain.{Password, User}
 import com.google.inject.Inject
@@ -11,7 +13,7 @@ import scala.concurrent.Future
 /**
   * Created by vparashar on 02/07/2017.
   */
-class UserRepository @Inject()(dbConfig: DBConfig) {
+class UserRepository @Inject()(dbConfig: DBConfig[Database]) {
 
   val db = dbConfig.profile
 
@@ -37,7 +39,7 @@ class UserRepository @Inject()(dbConfig: DBConfig) {
     userTable.filter(_.email === email).result.headOption
   }
 
-  def getById(id: Long): Future[Option[User]] = db.run {
+  def getById(id: UUID): Future[Option[User]] = db.run {
     userTable.filter(_.id === id).result.headOption
   }
 
@@ -51,7 +53,7 @@ class UserRepository @Inject()(dbConfig: DBConfig) {
     def * = (id.?, email, password) <> ( { t => User(t._1, t._2, Password(t._3)) }, { user: User => Some(user.id, user.email, user.password.toString) }
     )
 
-    def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
+    def id = column[UUID]("id", O.PrimaryKey, O.AutoInc)
 
     def email = column[String]("user_email")
 
