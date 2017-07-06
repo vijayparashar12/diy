@@ -31,7 +31,7 @@ trait UserRoutes {
           }
         }
       } ~
-      path("user" / LongNumber) { (id) =>
+      path("user" / JavaUUID) { (id) =>
         get {
           onComplete(userRepository.getById(id)) {
             case Success(user) => complete(OK, user)

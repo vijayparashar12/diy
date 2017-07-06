@@ -1,13 +1,6 @@
-﻿CREATE SEQUENCE IF NOT EXISTS diy.USERS_id_seq
-    INCREMENT 1
-    START 10000
-    MINVALUE 10000
-    MAXVALUE 9223372036854775807
-    CACHE 1;
-
-CREATE TABLE IF NOT EXISTS diy.USERS
+﻿CREATE TABLE IF NOT EXISTS diy.USERS
 (
-    id bigint NOT NULL,
+    id UUID NOT NULL default uuid_generate_v4(),
     user_email varchar(40) NOT NULL,
     user_password varchar(60) NOT NULL,
     CONSTRAINT "USERS_pkey" PRIMARY KEY (id)

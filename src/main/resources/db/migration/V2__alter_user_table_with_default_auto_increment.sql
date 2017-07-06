@@ -1,1 +1,0 @@
-alter table diy.users alter column id set default nextval('diy.USERS_id_seq');
